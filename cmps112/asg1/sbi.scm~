@@ -1,0 +1,145 @@
+#!/afs/cats.ucsc.edu/courses/cmps112-wm/usr/racket/bin/mzscheme -qr
+;;
+;; NAME
+;;    sbi.scm - silly basic interpreter
+;;
+;; AUTHOR
+;;    Alix Feinsod
+;;    ID#1436764
+;;    afeinsod@ucsc.edu
+;;
+;; SYNOPSIS
+;;    sbi.scm filename.sbir
+;;
+;; DESCRIPTION
+;;    The file mentioned in argv[1] is read and assumed to be an
+;;    SBIR program, which is the executed. 
+;;
+
+(define *stderr* (current-error-port))
+ (define *run-file*
+     (let-values
+         (((dirpath basepath root?)
+             (split-path (find-system-path 'run-file))))
+         (path->string basepath))
+ )
+
+ (define (die list)
+     (for-each (lambda (item) (display item *stderr*)) list)
+     (newline *stderr*)
+     (exit 1)
+ )
+
+ (define (usage-exit)
+     (die '("Usage: " ,*run-file* " filename"))
+ )
+
+ (define (readlist-from-inputfile filename)
+     (let ((inputfile (open-input-file filename)))
+          (if (not (input-port? inputfile))
+              (die '(,*run-file* ": " ,filename ": open failed"))
+              (let ((program (read inputfile)))
+                   (close-input-port inputfile)
+                          program))))
+
+;;this is just the definition of function-table, the hash table that holds all the functions
+(define *function-table* (make-hash))
+
+;;make-function-table: this function adds all of the necessary functions into the 
+;;hash table function-table so that they can be used when executing the code.
+;;no inputs, only output is putting elements in a hash table. 
+(define (make-function-table)
+    (hash-set! *function-table* "dim" (lambda (x y) (hash-set! variable-table x (make-vector y))))
+    (hash-set! *function-table* "let" (lambda (x y) (hash-set! variable-table x y)))
+    (hash-set! *function-table* "goto" (lambda (x) x))
+    (hash-set! *function-table* "if" (lambda (x y) (if (x) y (void))))
+    (hash-set! *function-table* "print" (lambda (args) 
+        ;;base case
+        (if (null? args) 
+            (print "~n") 
+	    (if (not (list? args))
+		(print args)
+        ;;recursive case
+        ((print (first args)) ((hash-ref *function-table* "print") (rest (args))))))))
+
+    (hash-set! *function-table* "input" (lambda (args) 
+        ;;base case
+        (if (null? args)
+            (void) 
+            ;;recurside case
+            ((let ((x (read))) 
+                (cond 
+                    [(not? (number? x)) 
+		     ((print "Not a number ~n") ((hash-ref *function-table* "input") args))
+		     (hash-set! variable-table (first (args)) x)]))
+            (hash-set! variable-table inputcount (+ 1 (hash-ref variable-table inputcount)))
+            (hash-ref *function-table* "input") (rest (args))))))
+) 
+        
+;;Atom? is a function to check if something is an atom. It returns a boolean.
+(define (atom? x)
+    (when (null? (cdr x))
+        (when (not (list? (second x))) #t)) #f)
+
+;;this is just the definition of label-table, the hash table for holding labels
+(define label-table (make-hash))
+
+;;make-label-table: takes in a list of lines, and adds the lines with lables into a hash table 
+;;so that they can be looked up when executing. No outputs.
+(define (make-label-table list-of-lines)
+    ;;base case
+    (cond
+        [(null? list-of-lines) (return)])
+    (let ((line (car(list-of-lines))))
+        (when (atom? (cadr line))
+            (hash-set! label-table (cadr line) (car line))
+        )
+    (make-label-table (rest (list-of-lines))))
+)
+
+;;this is just the definition of variable-table, the hash table for holding variables
+(define variable-table (make-hash))
+
+;;this function inializes some key variables in the variable-table
+(define (make-variable-table)
+    (hash-set! variable-table pi 3.14159265)
+    (hash-set! variable-table e 2.71828)
+    (hash-set! variable-table inputcount 0)
+)
+
+;;this recursive function takes in a line, evaluates inner expressions and then outer expressions
+(define (do-line line)
+  ;;base case
+    (if (list? (rest line)) 
+    (hash-ref function-table car(line) (do-line (cdr line)))
+    ;;recursive case
+    (hash-ref function-table car(line) (cdr line))
+    )
+)
+
+;;execute-line: takes in a list of lines and a line number
+;;executes the line indicated by the number and then continues.
+;;ouput is whatever the program is supposed to do. 
+;;recursive function
+(define (execute-line list-of-lines line-num)
+	;;base case
+    (if (null? list-of-lines) (void) 
+	;;recursive case
+    (let ((line (list-ref list-of-lines line-num)) (number (do-line line)))
+      (if (not (void? number))    
+        (execute-line list-of-lines number)
+            (execute-line list-of-lines (+ linenum 1))
+    )))
+)
+
+ (define (main arglist)
+     (if (or (null? arglist) (not (null? (cdr arglist))))
+         (usage-exit)
+         (let* ((sbprogfile (car arglist))
+                (program (readlist-from-inputfile sbprogfile)))
+		(make-function-table)
+		(make-label-table program)
+		(make-variable-table)
+               (execute-line program))))
+
+ (main (vector->list (current-command-line-arguments)))

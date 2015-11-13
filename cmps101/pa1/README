@@ -1,0 +1,23 @@
+Alix Feinsod
+afeinsod
+Programming Assignment 1 for CMPS 101, Winter 2015
+README
+
+Files submitted for PA1:
+
+List.java - a doubly-linked and double-ended list ADT 
+with all the methods specified by the assignment.
+
+ListClient.java - tests the list ADT. Unedited from 
+version provided by prof. Tantalo.
+
+Lex.java - accepts 2 arguments, an input file and an 
+output file, and uses List.java to sort the lines
+of the input file alphabetically and print them into
+the output file. 
+
+Makefile - compiles and cleans the classes and 
+dependencies between the files. Unedited from 
+version provided by prof. Tantalo.
+
+README - List of files submitted for PA1.

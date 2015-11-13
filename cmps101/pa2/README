@@ -1,0 +1,24 @@
+Alix Feinsod
+afeinsod
+README for Programming Assignment 2, CMPS101
+
+Files Submitted for pa2:
+
+List.c - a doubly-linked and double-ended list ADT 
+with all the methods specified by the assignment.
+
+List.h - header file for List.c
+
+ListClient.c - tests the list ADT. Unedited from 
+version provided by prof. Tantalo.
+
+Lex.c - accepts 2 arguments, an input file and an 
+output file, and uses List.c to sort the lines
+of the input file alphabetically and print them into
+the output file. 
+
+Makefile - compiles and cleans the classes and 
+dependencies between the files. Unedited from 
+version provided by prof. Tantalo.
+
+README - List of files submitted for PA2.

@@ -1,0 +1,26 @@
+Alix Feinsod
+afeinsod
+CMPS 101 PA5
+README - List of files submitted for PA5
+Note: There are 2 extra functions in Graph.h and Graph.c that are extra, 
+which I used for this assignment. They were my way of accessing the
+number of strongly connected components in a graph and indexing those
+components. 
+ 
+README - List of files submitted for PA5 
+
+Makefile - Makefile for PA5 
+
+List.h - Header file for List ADT 
+
+List.c - List ADT from PA2 
+
+Graph.h - header file for Graph ADT 
+
+Graph.c - Graph ADT which can do DFS
+
+GraphTest.c - Tests the Graph ADT
+
+FindComponents.c - Client for Graph ADT, uses it to 
+	find connected components of a graph.
+

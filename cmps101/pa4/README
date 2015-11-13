@@ -1,0 +1,18 @@
+Alix Feinsod
+CruzID: afeinsod
+CMPS 101, PA4
+README
+List and descriptions of files submitted for PA4
+
+Files submitted:
+
+README: a list of files submitted for PA4
+Makefile: a simple Makefile with commands
+List.c: List file unedited from PA2
+List.h: List header file undedited from PA2
+Graph.c: graph ADT, can perform BFS
+Graph.h: header file for graph ADT
+GraphTest.c: test file for graph ADT
+FindPath.c: client of Graph.c, uses graph to perform BFS a
+	given number of times and output shortest paths to 
+	a file.

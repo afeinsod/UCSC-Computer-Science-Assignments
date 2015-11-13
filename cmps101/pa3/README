@@ -1,0 +1,28 @@
+Alix Feinsod
+afeinsod
+CMPS 101, Programming Assignment 3
+README for CMPS 101, PA3
+
+Sparse.java
+	Takes in a file and performs matrix operations on the 
+	matrixes from the file using Matrix.java, and outputs 
+	the results into a new file.
+
+Matrix.java
+	A Matrix ADT, allowing matrix operations to be performed
+	efficiently, which uses List.java.
+
+List.java
+	Edited from PA1 to take objects instead of ints.
+
+MatrixTest.java
+	A class which tests the Matrix ADT.
+
+ListTest.java
+	A class which tests the List ADT.
+
+Makefile
+	Unedited from the Makefile given by prof. Tantalo.
+
+README
+	A list of files submitted for CMPS 101, PA3.

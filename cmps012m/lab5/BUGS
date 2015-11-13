@@ -1,0 +1,12 @@
+Alix Feinsod
+CruzID: afeinsod
+Class: CMPS 12B/M 
+BUGS
+Lists bugs fixed for lab5
+
+Line number: 11, existing bug: pointer not pointing to anything, fixed: made it null
+Line number: 24, existing bug: new structs are not pointers, have no memory allocated, fixed: made them pointers, allocated memory
+Line number: 26,29 existing bug: should not be addresses, fixed: removed &
+Line number: 25, 26, 27, 27 existing bug: should be -> not ., fixed: changed to ->
+Line number: 39, existing bug: remove does not free memory, fixed: added a pointer that is freed
+Line number: 58, existing bug: destroy only frees the head, fixed: goes through the list and frees everything
