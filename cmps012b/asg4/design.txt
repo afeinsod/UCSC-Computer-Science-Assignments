@@ -1,0 +1,24 @@
+Alix Feinsod
+CruzID: afeinsod
+Class: CMPS 12B/M
+design.txt
+A written description of my design for Assignment 4
+
+Using Java
+
+main class cyoa.java
+-checks that there is an input file
+-parses input file, creates a queue of new rooms and adds in their various descriptions and options
+-stores the first room, then sorts the queue of rooms
+-calls the play method on the first room
+-scans for user input, using a switch statement to call various methods of room and option
+
+room.java
+-has an unordered array of Strings called description, can be added to or printed out
+-has an unordered array of options, can be added to and printed out
+-has a play method that presents the options 
+
+option.java
+-has a String called optionTag
+-has a string with the text of the option
+-has a char letter (a-l) 
