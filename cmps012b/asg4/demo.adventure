@@ -1,0 +1,83 @@
+r start
+d You are doing homework in the lounge.
+d Many hallmates are doing homework there too.
+d One of the guys calls another a girl for getting a problem wrong.
+o Keep doing your homework.
+t homework
+o Jump out of the window.
+t jump
+o Interrupt their conversation to ask him why he would associate being a woman with being wrong.
+t interrupt
+
+r homework
+d You keep doing your homework.
+d You are getting hungry, and tired.
+o Keep doing homework.
+t start
+o Go eat.
+t dinner
+o Go to sleep.
+t bedtime
+
+r jump
+d You jump out of the window out of frustration with the patriarchy.
+d You are dead.
+
+r interrupt
+d You interrupt their conversation to ask him why he would associate being a woman with being wrong.
+d He responds that he's just joking around.
+o Say "OK" and go back to doing homework
+t start
+o Jump out of the window
+t jump
+o Give up and go out with your friends.
+t out
+o Respond that it's with little comments like that keep the patriarchy alive and well.
+t patriarchy
+
+r dinner
+d You go to dinner, a little worried about your homework.
+o Go back to doing homework.
+t homework
+o Go to sleep.
+t bedtime
+o You call your friends and see if they want to go out.
+t out
+
+r bedtime
+d You go to sleep.
+d The patriarchy lives on.
+d and your homework isn't done.
+
+r out
+d You go out dancing with your friends.
+d You're having a fun night, when someone won't leave your friend alone.
+o Confront him.
+t patriarchy
+o Remove your friend and go home.
+t bedtime
+o Drink the pain away.
+t drink
+
+r patriarchy
+d You explain the ways which years and years of abuse and subjugation have led to incredible amounts of inequality and injustice which women experience everyday.
+o Go home and go to sleep.
+t bedtime
+o The patriarchy is the worst. Jump out of the window.
+t jump
+o He's listened this far! Explain how he can help.
+t smash
+
+r drink
+d You drink everything.
+d Because of the patriarchy.
+d Now you can sleep, or try that homework again.
+o Go to sleep
+t bedtime
+o More homework!
+t start
+
+r smash
+d You explain that he can help overcome the inequality by being more aware of his words and actions.
+d He gets it.
+d Congratulations! You have smashed the patriarchy!
